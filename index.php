@@ -67,7 +67,11 @@ switch($action) {
         }
         break;
     case 'logout':
-        //Will need stuff to logout the user
+        $_SESSION = array();   // Clear all session data from memory
+        session_destroy();     // Clean up the session ID
+        $login_message = 'You have been logged out.';
+        include('view/login.php');
+        break;
 }       
 
 
