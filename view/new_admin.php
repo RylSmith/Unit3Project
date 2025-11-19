@@ -27,8 +27,6 @@
                     value="">
                 <?php echo $fields->getField('verify')->getHTML(); ?><br>
 
-                <!-- Will need to add a password verify to make sure this and the first password match. -->
-
                 <label>&nbsp;</label>
                 <input type="submit" value="Create Login">
             </form>
