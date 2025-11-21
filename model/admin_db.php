@@ -2,7 +2,7 @@
 
 function add_admin($email, $firstName, $lastName, $password) {
     global $db;
-    $hash = password_hash($password, PASSWORD_DEFAULT); // update this query
+    $hash = password_hash($password, PASSWORD_DEFAULT);
     $query = 'INSERT INTO administrators (emailAddress, password, fName, lName) 
               VALUES (:email, :password, :fName, :lName)';
     $statement = $db->prepare($query);
