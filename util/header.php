@@ -1,3 +1,3 @@
 <head> 
-    <title>Example Name</title>
+    <title>Task List</title>
 </head>

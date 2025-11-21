@@ -17,6 +17,16 @@
                     value="">
                 <?php echo $fields->getField('email')->getHTML(); ?><br>
 
+                <label>First Name:</label>
+                <input type="text" name="first_name" 
+                    value="">
+                <?php echo $fields->getField('first_name')->getHTML(); ?><br>
+
+                <label>Last Name:</label>
+                <input type="text" name="last_name" 
+                    value="">
+                <?php echo $fields->getField('last_name')->getHTML(); ?><br>
+
                 <label>Password:</label>
                 <input type="password" name="password" 
                     value="">

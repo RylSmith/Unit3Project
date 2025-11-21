@@ -8,6 +8,8 @@ require_once('model/validate.php');
 $validate = new Validate();
 $fields = $validate->getFields();
 $fields->addField('email', 'Must be a valid email address.');
+$fields->addField('first_name');
+$fields->addField('last_name');
 $fields->addField('password', 'Must be at least 8 characters, contain an uppercase letter, and a digit.');
 $fields->addField('verify', 'Must match the password given.');
 
@@ -52,17 +54,21 @@ switch($action) {
         break;
     case 'new_admin_login':
         $email = trim(filter_input(INPUT_POST, 'email'));
+        $firstName = trim(filter_input(INPUT_POST, 'first_name'));
+        $lastName = trim(filter_input(INPUT_POST, 'last_name'));
         $password = filter_input(INPUT_POST, 'password');
         $verify = filter_input(INPUT_POST, 'verify');
 
         $validate->email('email', $email);
+        $validate->text('first_name', $firstName);
+        $validate->text('last_name', $lastName);
         $validate->password('password', $password);
         $validate->verify('verify', $password, $verify);
         
         if ($fields->hasErrors()) {
             include 'view/new_admin.php';
         } else {
-            add_admin($email, $password);
+            add_admin($email, $firstName, $lastName, $password);
             include 'view/login.php';
         }
         break;

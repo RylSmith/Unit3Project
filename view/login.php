@@ -6,7 +6,7 @@
   <?php include('util/header.php');?>
   <body> 
         <header>
-            <h1>Blank</h1>
+            <h1>Sign In</h1>
         </header>
         <main>
             <form action="." method="post" id="login_form" class="aligned">
