@@ -27,4 +27,17 @@ function is_valid_admin_login($email, $password) {
     return password_verify($password, $hash);
 }
 
+function get_user_id($email) {
+    global $db;
+    $query = 'SELECT * FROM administrators
+              WHERE emailAddress = :email';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+    $user = $statement->fetch();
+    $statement->closeCursor();    
+    $user_id = $user['Id'];
+    return $user_id;
+}
+
 ?>

@@ -117,5 +117,22 @@ class Validate {
         }
     }
 
+    public function dueDate($name, $value) {
+        $field = $this->fields->getField($name);
+        $datePattern = '/^[1-9][[:digit:]]{3}?\-(0[1-9]|1[012])\-(0[1-9]|1[0-9]|2[0-9]|3[01])$/';
+        $match = preg_match($datePattern, $value);
+        if ( $match === false ) {
+            $field->setErrorMessage('Error testing field.');
+            echo('This is problem1');
+            return;
+        }
+        if ( $match != 1 ) {
+            $field->setErrorMessage('Invalid date format.');
+            echo('This is problem2');
+            return;
+        }
+        $field->clearErrorMessage();
+    }
+
 }
 ?>
