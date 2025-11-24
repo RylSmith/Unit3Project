@@ -55,7 +55,31 @@ switch($action) {
         break;
     case 'show_admin_menu':
         include('view/home.php');
-        break;   
+        break;
+    case 'manage_user_form':
+        include('view/manage_user_form.php');
+        break;
+    case 'update_user_form':
+        include('view/update_user_form.php');
+        break;
+    case 'update_user':
+        $email = trim(filter_input(INPUT_POST, 'email'));
+        $firstName = trim(filter_input(INPUT_POST, 'first_name'));
+        $lastName = trim(filter_input(INPUT_POST, 'last_name'));
+
+        $validate->email('email', $email);
+        $validate->text('first_name', $firstName);
+        $validate->text('last_name', $lastName);
+
+        $Id = $_SESSION['user_id'];
+
+        if ($fields->hasErrors()) {
+            include 'view/manage_user_form.php';
+        } else {
+            update_admin($Id, $email, $firstName, $lastName);
+            include 'view/manage_user_form.php';
+        } 
+        break;
     case 'new_admin':
         include('view/new_admin.php');
         break;

@@ -1,5 +1,17 @@
 <?php 
 
+function get_admin($user_id) {
+    global $db;
+    $query = 'SELECT * FROM administrators
+              WHERE Id = :user_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->execute();
+    $user = $statement->fetch();
+    $statement->closeCursor();
+    return $user;
+}
+
 function add_admin($email, $firstName, $lastName, $password) {
     global $db;
     $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -10,6 +22,20 @@ function add_admin($email, $firstName, $lastName, $password) {
     $statement->bindValue(':password', $hash);
     $statement->bindValue(':fName', $firstName);
     $statement->bindValue(':lName', $lastName);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function update_admin($Id, $email, $firstName, $lastName) {
+    global $db;
+    $query = 'UPDATE administrators
+              SET emailAddress = :email, fName = :fName, lName = :lName
+              WHERE Id = :Id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':fName', $firstName);
+    $statement->bindValue(':lName', $lastName);
+    $statement->bindValue(':Id', $Id);
     $statement->execute();
     $statement->closeCursor();
 }
